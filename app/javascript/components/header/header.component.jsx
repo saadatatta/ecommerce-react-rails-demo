@@ -1,4 +1,5 @@
 import React from "react"
+import {Link} from "react-router-dom"
 
 const Header = () => {
     return (
@@ -31,7 +32,9 @@ const Header = () => {
                     </a>
                 </div>
                 <div>
-                    <a href="#" className="inline-block text-sm pr-4 mr-2 py-2 text-white hover:text-teal-500 lg:mt-0">SIGN IN</a>
+                    <Link to="/sign_up"
+                          className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
+                        UP</Link>
 
                 </div>
             </div>
