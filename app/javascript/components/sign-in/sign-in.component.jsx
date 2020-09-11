@@ -17,7 +17,7 @@ const SignIn = (props) => {
 
             try {
                 const formData = JSON.stringify(values, null, 2)
-                const res = await axios.post("/auth/sign_in.json", formData, config)
+                const res = await axios.post("/api/v1/auth/sign_in.json", formData, config)
                 const obj = {
                     'access-token': res.headers['access-token'],
                     'client': res.headers.client,

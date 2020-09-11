@@ -18,7 +18,7 @@ const SignUp = (props) => {
 
             try {
                 const formData = JSON.stringify(values, null, 2)
-                const res = await axios.post("/auth", formData, config)
+                const res = await axios.post("/api/v1/auth.json", formData, config)
                 const obj = {
                     'access-token': res.headers['access-token'],
                     'client': res.headers.client,
