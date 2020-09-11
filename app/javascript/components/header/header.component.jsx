@@ -35,7 +35,9 @@ const Header = () => {
                     <Link to="/sign_up"
                           className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
                         UP</Link>
-
+                    <Link to="/sign_in"
+                          className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
+                        IN</Link>
                 </div>
             </div>
         </nav>
