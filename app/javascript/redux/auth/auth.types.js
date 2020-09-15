@@ -1,0 +1,6 @@
+const AUTH_TYPES = {
+    AUTH_SUCCESS: "AUTH_SUCCESS",
+    AUTH_FAILURE: "AUTH_FAILURE"
+}
+
+export default AUTH_TYPES
