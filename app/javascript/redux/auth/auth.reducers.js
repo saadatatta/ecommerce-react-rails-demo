@@ -12,6 +12,7 @@ export default (state = INITIAL_STATE, action) => {
                 auth: action.payload
             }
         case AUTH_TYPES.AUTH_FAILURE:
+        case AUTH_TYPES.LOGOUT:
             return {
                 ...state,
                 auth: null
