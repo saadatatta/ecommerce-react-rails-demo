@@ -1,8 +1,8 @@
 import React from "react"
 import {useFormik} from "formik"
 import {connect} from "react-redux"
-import axios from "axios"
 import {authFailure, authSuccess} from "../../redux/auth/auth.actions";
+import {setAuth} from "../../redux/auth/auth.utils";
 
 const SignUp = ({setAuthSuccess, setAuthFailure, history}) => {
     const formik = useFormik({
@@ -12,26 +12,13 @@ const SignUp = ({setAuthSuccess, setAuthFailure, history}) => {
             password_confirmation: ''
         },
         onSubmit: async (values) => {
-            const config = {
-                headers: {
-                    "Content-Type": "application/json"
-                }
+            const res = await setAuth("/api/v1/auth.json",values)
+            if(res){
+                setAuthSuccess(res)
+                history.push("/")
             }
-
-            try {
-                const formData = JSON.stringify(values, null, 2)
-                const res = await axios.post("/api/v1/auth.json", formData, config)
-                const obj = {
-                    'access-token': res.headers['access-token'],
-                    'client': res.headers.client,
-                    'uid': res.data.data.uid
-                }
-                sessionStorage.setItem('user', JSON.stringify(obj))
-                setAuthSuccess(obj)
-                props.history.push("/")
-            } catch (e) {
+            else {
                 setAuthFailure()
-                console.log(e)
             }
         }
     });
