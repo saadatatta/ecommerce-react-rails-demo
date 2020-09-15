@@ -1,11 +1,11 @@
-import React from "react"
+import React, {Fragment} from "react"
 import {Link} from "react-router-dom"
 import {logOut} from "../../redux/auth/auth.actions";
 import axios from "axios"
 import {connect} from "react-redux";
 import {setAuthTokenHeaders} from "../../utils/axios";
 
-const Header = ({logOutUser}) => {
+const Header = ({auth, logOutUser}) => {
 
     const signOutUser = async () => {
         try {
@@ -17,6 +17,26 @@ const Header = ({logOutUser}) => {
             console.log(e.message)
         }
     }
+
+    const authenticatedLinks = (
+        <Fragment>
+            <div onClick={signOutUser}
+                 className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0 cursor-pointer">SIGN
+                OUT
+            </div>
+        </Fragment>
+    )
+
+    const unauthenticatedLinks = (
+        <Fragment>
+            <Link to="/sign_up"
+                  className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
+                UP</Link>
+            <Link to="/sign_in"
+                  className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
+                IN</Link>
+        </Fragment>
+    )
 
     return (
         <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -48,24 +68,21 @@ const Header = ({logOutUser}) => {
                     </a>
                 </div>
                 <div>
-                    <Link to="/sign_up"
-                          className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
-                        UP</Link>
-                    <Link to="/sign_in"
-                          className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0">SIGN
-                        IN</Link>
-                    <div onClick={signOutUser}
-                         className="inline-block text-sm pr-4 mr-2 py-2 text-white lg:mt-0 cursor-pointer">SIGN
-                        OUT
-                    </div>
+                    {
+                        auth ? authenticatedLinks : unauthenticatedLinks
+                    }
                 </div>
             </div>
         </nav>
     )
 }
 
+const mapStateToProps = (state) => ({
+    auth: state.auth.auth
+})
+
 const mapDispatchToProps = (dispatch) => ({
     logOutUser: () => dispatch(logOut())
 })
 
-export default connect(null,mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
