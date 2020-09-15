@@ -1,8 +1,10 @@
 import React from "react"
 import {useFormik} from "formik"
+import {connect} from "react-redux"
 import axios from "axios"
+import {authFailure, authSuccess} from "../../redux/auth/auth.actions";
 
-const SignUp = (props) => {
+const SignUp = ({setAuthSuccess, setAuthFailure, history}) => {
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -25,8 +27,10 @@ const SignUp = (props) => {
                     'uid': res.data.data.uid
                 }
                 sessionStorage.setItem('user', JSON.stringify(obj))
+                setAuthSuccess(obj)
                 props.history.push("/")
             } catch (e) {
+                setAuthFailure()
                 console.log(e)
             }
         }
@@ -83,4 +87,9 @@ const SignUp = (props) => {
     )
 }
 
-export default SignUp
+const mapDispatchToProps = (dispatch) => ({
+    setAuthSuccess: (data) => dispatch(authSuccess(data)),
+    setAuthFailure: () => dispatch(authFailure())
+})
+
+export default connect(null,mapDispatchToProps)(SignUp)
