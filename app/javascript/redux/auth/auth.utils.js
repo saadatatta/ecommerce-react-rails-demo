@@ -15,10 +15,18 @@ export const setAuth = async (url, values) => {
             'client': res.headers.client,
             'uid': res.data.data.uid
         }
-        sessionStorage.setItem('user', JSON.stringify(obj))
+        localStorage.setItem('user', JSON.stringify(obj))
         return obj
     } catch (e) {
         console.log(e)
         return null
+    }
+}
+
+export const constructAuthObject = (res) => {
+    return {
+        'access-token': res.headers['access-token'],
+        'client': res.headers.client,
+        'uid': res.headers.uid
     }
 }

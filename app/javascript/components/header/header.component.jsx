@@ -11,7 +11,7 @@ const Header = ({auth, logOutUser}) => {
         try {
             setAuthTokenHeaders()
             await axios.delete("/api/v1/auth/sign_out.json")
-            sessionStorage.removeItem('user')
+            localStorage.removeItem('user')
             logOutUser()
         } catch (e) {
             console.log(e.message)

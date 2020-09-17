@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const setAuthTokenHeaders = () => {
-    const auth = JSON.parse(sessionStorage.user)
+    const auth = JSON.parse(localStorage.user)
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     if (auth) {
         Object.keys(auth).forEach((key) => {
