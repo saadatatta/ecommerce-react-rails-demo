@@ -1,6 +1,10 @@
 {
   "name": "ecommerce_react_rails_demo",
   "private": true,
+  "engines": {
+    "node": "12.18.3",
+    "npm": "6.14.6"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.10.4",
     "@rails/actioncable": "^6.0.0",
