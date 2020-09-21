@@ -1,5 +1,5 @@
-import React, {Fragment, useEffect, Suspense, lazy} from 'react'
-import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom"
+import React, {Fragment, useEffect, useState} from 'react'
+import {Route, Switch, Redirect} from "react-router-dom"
 import axios from "axios"
 import {connect} from "react-redux"
 import Header from "./header/header.component";
@@ -9,15 +9,18 @@ import {authFailure, authSuccess} from "../redux/auth/auth.actions";
 import {constructAuthObject} from "../redux/auth/auth.utils";
 import AuthRedirectRoute from "./routing/auth-redirect-route.component";
 import Spinner from "./spinner/spinner.component";
-
-const SignUp = lazy(()=> import("./sign-up/sign-up.component"))
-const SignIn = lazy(()=> import("./sign-in/sign-in.component"))
-const HomePage = lazy(()=> import("../pages/home-page/home-page.component"))
-
+import SignUp from "./sign-up/sign-up.component"
+import SignIn from "./sign-in/sign-in.component";
+import HomePage from "../pages/home-page/home-page.component";
 
 const App = ({setAuthSuccess, setAuthFailure, auth}) => {
+
+    const [isFetching, setIsFetching] = useState(true)
+
     useEffect(() => {
-        loginStatus()
+        loginStatus().then(() => {
+            setIsFetching(false)
+        })
     }, [])
 
     // Check for login status on app start so that session can be created
@@ -36,17 +39,17 @@ const App = ({setAuthSuccess, setAuthFailure, auth}) => {
 
     return (
         <Fragment>
-            <Router>
-                <Header/>
-                <Switch>
-                    <Suspense fallback={<Spinner/>}>
+            <Header/>
+            {isFetching ?
+                <Spinner/> :
+                (
+                    <Switch>
                         <PrivateRoute exact path="/" component={HomePage}/>
                         <AuthRedirectRoute exact path="/sign_up" component={SignUp}/>
                         <AuthRedirectRoute exact path="/sign_in" component={SignIn}/>
-                    </Suspense>
-                </Switch>
-
-            </Router>
+                    </Switch>
+                )
+            }
         </Fragment>
     )
 }
