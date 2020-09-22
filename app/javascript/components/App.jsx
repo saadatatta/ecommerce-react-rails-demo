@@ -40,16 +40,17 @@ const App = ({setAuthSuccess, setAuthFailure, auth}) => {
     return (
         <Fragment>
             <Header/>
-            {isFetching ?
-                <Spinner/> :
-                (
-                    <Switch>
-                        <PrivateRoute exact path="/" component={HomePage}/>
-                        <AuthRedirectRoute exact path="/sign_up" component={SignUp}/>
-                        <AuthRedirectRoute exact path="/sign_in" component={SignIn}/>
-                    </Switch>
-                )
-            }
+            <Spinner/>
+            {/*{isFetching ?*/}
+            {/*    <Spinner/> :*/}
+            {/*    (*/}
+            {/*        <Switch>*/}
+            {/*            <PrivateRoute exact path="/" component={HomePage}/>*/}
+            {/*            <AuthRedirectRoute exact path="/sign_up" component={SignUp}/>*/}
+            {/*            <AuthRedirectRoute exact path="/sign_in" component={SignIn}/>*/}
+            {/*        </Switch>*/}
+            {/*    )*/}
+            {/*}*/}
         </Fragment>
     )
 }
