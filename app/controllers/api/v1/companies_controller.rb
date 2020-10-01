@@ -1,6 +1,7 @@
 module Api
   module V1
     class CompaniesController < ApiController
+      before_action :authenticate_api_v1_user!
 
       def index
         companies = current_user.companies
@@ -23,7 +24,7 @@ module Api
       private
 
       def company_params
-        params.permit(:name, :url, :user_id)
+        params.permit(:name, :url, :user_id, :logo)
       end
 
     end
