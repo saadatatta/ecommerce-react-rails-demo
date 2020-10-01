@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   end
 
   # Redirect all requests which are not api to react frontend
-  get '/*path' => 'homepage#index'
+  get '/*path', to: 'homepage#index', constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
+
   root 'homepage#index'
+
 end
