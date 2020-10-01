@@ -12,6 +12,7 @@ import Spinner from "./spinner/spinner.component";
 import SignUp from "./sign-up/sign-up.component"
 import SignIn from "./sign-in/sign-in.component";
 import HomePage from "../pages/home-page/home-page.component";
+import CompanyRoutes from "./company/company-routes.component";
 
 const App = ({setAuthSuccess, setAuthFailure, auth}) => {
 
@@ -45,6 +46,7 @@ const App = ({setAuthSuccess, setAuthFailure, auth}) => {
                 (
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage}/>
+                        <PrivateRoute path="/companies" component={CompanyRoutes}/>
                         <AuthRedirectRoute exact path="/sign_up" component={SignUp}/>
                         <AuthRedirectRoute exact path="/sign_in" component={SignIn}/>
                     </Switch>
