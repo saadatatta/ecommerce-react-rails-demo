@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import {setAuthTokenHeaders} from "../../utils/axios";
 import axios from "axios"
 
-const NewCompany = () => {
+const NewCompany = ({history}) => {
 
     const formik = useFormik({
         initialValues: {
@@ -12,14 +12,21 @@ const NewCompany = () => {
         },
         onSubmit: async values => {
             const formData = new FormData()
-            Object.keys(values).forEach((key)=>{
-                console.log(key,values[key])
+            Object.keys(values).forEach((key) => {
                 formData.append(key.toString(), values[key])
             })
-            console.log(formData)
             setAuthTokenHeaders()
-            const res = await axios.post("/api/v1/companies.json", formData)
-            console.log(res)
+            try {
+                const res = await axios.post("/api/v1/companies.json", formData)
+                if (res.status === 201) {
+                    history.push("/companies")
+                } else {
+                    //TODO: Show alert with message
+                }
+            } catch (e) {
+                //TODO: Display form errors
+                console.log(e.response.data.errors)
+            }
         }
     })
 

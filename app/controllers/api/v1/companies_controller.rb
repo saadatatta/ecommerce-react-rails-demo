@@ -11,7 +11,7 @@ module Api
       def create
         @company = current_user.companies.create(company_params)
         if @company.persisted?
-          render json: @company
+          render json: @company, status: :created
         else
           render_resource_error_message(@company)
         end
