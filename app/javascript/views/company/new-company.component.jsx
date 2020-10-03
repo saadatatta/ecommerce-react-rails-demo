@@ -1,14 +1,16 @@
-import React from "react"
+import React,{useState} from "react"
 import {useFormik} from "formik";
 import {setAuthTokenHeaders} from "../../utils/axios";
 import axios from "axios"
+import FileUploadPreview from "../../components/file-upload-preview/file-upload-preview.component";
+import Alert from "../../components/alert/alert.component";
 
 const NewCompany = ({history}) => {
-
     const formik = useFormik({
         initialValues: {
             name: '',
-            url: ''
+            url: '',
+            logo: null
         },
         onSubmit: async values => {
             const formData = new FormData()
@@ -64,7 +66,7 @@ const NewCompany = ({history}) => {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="flex flex-wrap -mx-3">
                     <div className="w-full px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                htmlFor="url">
@@ -75,6 +77,10 @@ const NewCompany = ({history}) => {
                             id="logo" type="file" name="logo"
                             onChange={handleLogoFieldChange}/>
                     </div>
+                </div>
+
+                <div className="flex items-center mb-6">
+                    <FileUploadPreview file={formik.values.logo}/>
                 </div>
 
                 <div className="flex items-center justify-between">
