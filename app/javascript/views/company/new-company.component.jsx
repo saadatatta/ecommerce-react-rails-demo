@@ -3,7 +3,8 @@ import {useFormik} from "formik";
 import {setAuthTokenHeaders} from "../../utils/axios";
 import axios from "axios"
 import FileUploadPreview from "../../components/file-upload-preview/file-upload-preview.component";
-import Alert from "../../components/alert/alert.component";
+import {reactToastError} from "../../utils/toast";
+
 
 const NewCompany = ({history}) => {
     const formik = useFormik({
@@ -23,7 +24,7 @@ const NewCompany = ({history}) => {
                 if (res.status === 201) {
                     history.push("/companies")
                 } else {
-                    //TODO: Show alert with message
+                    reactToastError("Something went wrong.Please try again")
                 }
             } catch (e) {
                 //TODO: Display form errors
