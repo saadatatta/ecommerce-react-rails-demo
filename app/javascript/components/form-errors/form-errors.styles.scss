@@ -1,0 +1,13 @@
+
+.form-errors{
+  &-container {
+    border-left-color: #FF9734;
+    background: #FFF6EB;
+    color: #F7920D;
+  }
+
+  &-list {
+    list-style: disc;
+    margin-left: 1rem;
+  }
+}
