@@ -1,12 +1,15 @@
-import React,{useState} from "react"
+import React, {useState} from "react"
 import {useFormik} from "formik";
 import {setAuthTokenHeaders} from "../../utils/axios";
 import axios from "axios"
 import FileUploadPreview from "../../components/file-upload-preview/file-upload-preview.component";
 import {reactToastError} from "../../utils/toast";
+import FormErrors from "../../components/form-errors/form-errors.component";
 
 
 const NewCompany = ({history}) => {
+    const [formErrors, setFormErrors] = useState(null)
+
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -27,8 +30,9 @@ const NewCompany = ({history}) => {
                     reactToastError("Something went wrong.Please try again")
                 }
             } catch (e) {
-                //TODO: Display form errors
-                console.log(e.response.data.errors)
+                setFormErrors(e.response.data.errors)
+                // Scroll To Top of browser to show form errors
+                window.scrollTo(0, 0)
             }
         }
     })
@@ -41,6 +45,8 @@ const NewCompany = ({history}) => {
         <div className="mx-8 my-8">
             <form onSubmit={formik.handleSubmit} className="w-full max-w-lg mx-auto">
                 <h2 className="my-8 text-blue-700 font-bold text-center text-2xl">New Company</h2>
+                <FormErrors errors={formErrors}/>
+
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
