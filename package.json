@@ -25,7 +25,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "tailwindcss": "^1.7.6",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "uuid": "^8.3.1"
   },
   "version": "0.1.0",
   "devDependencies": {
