@@ -1,5 +1,7 @@
 class Company < ApplicationRecord
   include Rails.application.routes.url_helpers
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
   validates_presence_of :name
   belongs_to :owner, class_name: 'User', foreign_key: :user_id
