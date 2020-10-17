@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'cloudinary'
 gem 'devise_token_auth'
+gem 'friendly_id', '~> 5.4.0'
 gem 'omniauth'
 gem 'rack-cors'
 
