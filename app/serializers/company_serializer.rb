@@ -1,6 +1,3 @@
 class CompanySerializer < ActiveModel::Serializer
-
-
-  attributes :id, :name, :url, :user_id, :logo_url
-
+  attributes :id, :name, :slug, :url, :user_id, :logo_url
 end
