@@ -23,9 +23,9 @@ module Api
         }, status: status
       end
 
-      def render_error_message(error='', status=422)
+      def render_error_message(errors='', status=422)
         render json: {
-          error: error 
+          errors: errors.is_a?(Array) ? errors : [errors]
         }, status: status
       end
 
