@@ -21,6 +21,13 @@ module Api
 
       end
 
+      def show
+        company = Company.friendly.find(params[:id])
+        if company.present?
+          render json: company, status: 200
+        end
+      end
+
       private
 
       def company_params
