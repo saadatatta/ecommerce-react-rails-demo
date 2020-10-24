@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         get :logged_in, on: :collection
       end
 
-      resources :companies, only: %i[create update destroy index] do
+      resources :companies, only: %i[create update destroy index show] do
       end
     end
   end
