@@ -11,6 +11,14 @@ module Api
       def create
         @company = current_user.companies.create(company_params)
         if @company.persisted?
+          if params[:logo].present? && params[:logo] != "null"
+            begin
+              @company.logo.attach(params[:logo])
+            rescue Exception=>e
+              render_error_message("something went wrong when uploading image")
+              return
+            end
+          end
           render json: @company, status: :created
         else
           render_resource_error_message(@company)
@@ -18,7 +26,20 @@ module Api
       end
 
       def update
-
+        @company = current_user.companies.friendly.find(params[:id])
+        if @company.update(company_params)
+          if params[:logo].present? && params[:logo] != "null"
+            begin
+              @company.logo.attach(params[:logo])
+            rescue Exception=>e
+              render_error_message("something went wrong when uploading image")
+              return
+            end
+          end
+          render json: @company, status: :ok
+        else
+          render_resource_error_message(@company)
+        end
       end
 
       def show
@@ -31,7 +52,7 @@ module Api
       private
 
       def company_params
-        params.permit(:name, :url, :user_id, :logo)
+        params.permit(:name, :url, :user_id)
       end
 
     end
