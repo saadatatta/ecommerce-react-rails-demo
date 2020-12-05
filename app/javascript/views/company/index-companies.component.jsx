@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react"
 import {setAuthTokenHeaders} from "../../utils/axios";
 import axios from "axios"
 import {reactToastError} from "../../utils/toast";
-import IndexCompanyCard from "./index-company-card.component";
-import {v4 as uuidv4} from "uuid";
+import IndexCompanyCardContainer from "./index-company-card.container";
 
 const IndexCompanies = () => {
     const [companies, setCompanies] = useState([])
+    const [loading,setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchCompaniesAsync() {
@@ -17,8 +17,10 @@ const IndexCompanies = () => {
                 if (companies && companies.length > 0) {
                     setCompanies(companies)
                 }
+                await setLoading(false)
             } catch (e) {
                 e.response.data.errors.forEach(error => reactToastError(error))
+                setLoading(false)
             }
         }
 
@@ -27,22 +29,10 @@ const IndexCompanies = () => {
 
     return (
         <>
-            <div>Index Companies</div>
-            {
-                companies.length === 0 ?
-                    <div> No Companies found </div> :
-                    <div className="flex m-8">
-                        {
-                            companies.map((company) => {
-                                return (
-                                    <IndexCompanyCard company={company} key={uuidv4()}/>
-                                )
-                            })
-                        }
-                    </div>
-            }
+            <h1 className="text-center font-bold text-xl mt-5">Companies</h1>
+            <IndexCompanyCardContainer companies={companies} loading={loading}/>
         </>
     )
 }
 
-export default IndexCompanies
+export default  IndexCompanies
