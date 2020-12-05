@@ -8,7 +8,7 @@ const IndexCompanyCardContainer = ({companies}) => {
         <>
             {
                 companies.length === 0 ?
-                    <div> No Companies found </div> :
+                    <div className="text-center font-regular text-xl m-auto mt-5"> No Companies found </div> :
                     <div className="flex m-8">
                         {
                             companies.map((company) => {
