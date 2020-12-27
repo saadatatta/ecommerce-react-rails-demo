@@ -49,6 +49,15 @@ module Api
         end
       end
 
+      def destroy
+        company = Company.friendly.find(params[:id])
+        if company.destroy
+          render_message('Company deleted successfully')
+        else
+          render_error_message('There was error deleting company. Please try again')
+        end
+      end
+
       private
 
       def company_params
