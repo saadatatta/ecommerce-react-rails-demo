@@ -13,6 +13,7 @@ import SignUp from "./sign-up/sign-up.component"
 import SignIn from "./sign-in/sign-in.component";
 import HomePage from "../pages/home-page/home-page.component";
 import CompanyRoutes from "../views/company/company-routes.component";
+import "./App.scss"
 
 const App = ({setAuthSuccess, setAuthFailure, auth}) => {
 
